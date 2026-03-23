@@ -1,6 +1,6 @@
-"""octeam lifecycle — agent state management.
+"""Claw Collective lifecycle — agent state management.
 
-Innovation: global state tracking via STATUS.md and ~/.octeam/ states.
+Innovation: global state tracking via STATUS.md and ~/.claws/ states.
 """
 
 from __future__ import annotations
@@ -10,8 +10,8 @@ from pathlib import Path
 
 import click
 
-from octeam.config import load_config
-from octeam.locking import file_lock
+from claws.config import load_config
+from claws.locking import file_lock
 
 
 def _update_status_md(workspace: Path, agent_id: str, new_status: str) -> None:
@@ -41,7 +41,7 @@ def cmd_shutdown(agent: str | None, team: str | None) -> None:
     """Shut down an agent and mark as OFFLINE."""
     config = load_config()
     workspace = Path(config.workspace_dir or os.getcwd())
-    agent_id = agent or os.environ.get("OCTEAM_AGENT", "unknown")
+    agent_id = agent or os.environ.get("CLAWS_AGENT", "unknown")
     
     _update_status_md(workspace, agent_id, "OFFLINE")
     click.echo(f"⏹️  Agent '{agent_id}' marked as OFFLINE")
@@ -54,7 +54,7 @@ def cmd_idle(agent: str | None, team: str | None) -> None:
     """Mark an agent as IDLE."""
     config = load_config()
     workspace = Path(config.workspace_dir or os.getcwd())
-    agent_id = agent or os.environ.get("OCTEAM_AGENT", "unknown")
+    agent_id = agent or os.environ.get("CLAWS_AGENT", "unknown")
 
     _update_status_md(workspace, agent_id, "IDLE")
     click.echo(f"💤 Agent '{agent_id}' marked as IDLE")

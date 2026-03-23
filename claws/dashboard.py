@@ -1,6 +1,6 @@
-"""octeam dashboard — web-based monitoring.
+"""Claw Collective dashboard — web-based monitoring.
 
-Innovation: single Python process (aiohttp + Jinja2), zero-config, reads ~/.octeam/
+Innovation: single Python process (aiohttp + Jinja2), zero-config, reads ~/.claws/
 """
 
 from __future__ import annotations
@@ -13,8 +13,8 @@ from aiohttp import web
 import jinja2
 import aiohttp_jinja2
 
-from octeam.config import load_config, data_dir
-from octeam.team import team_list
+from claws.config import load_config, data_dir
+from claws.team import team_list
 
 
 @aiohttp_jinja2.template("index.html")
@@ -30,7 +30,7 @@ async def index(request: web.Request) -> dict:
     return {
         "teams": teams,
         "config": config.model_dump(),
-        "title": "octeam Dashboard"
+        "title": "Claw Collective Dashboard"
     }
 
 
@@ -58,7 +58,7 @@ async def start_dashboard(port: int) -> None:
     </style>
 </head>
 <body>
-    <h1>🦞 octeam Dashboard</h1>
+    <h1>🦞 Claw Collective Dashboard</h1>
     <div class="card">
         <h2>Teams</h2>
         <div class="team-list">

@@ -1,4 +1,4 @@
-"""octeam plan — approval workflows for team changes.
+"""Claw Collective plan — approval workflows for team changes.
 
 Innovation: simple state transitions (pending -> approved/rejected).
 """
@@ -14,8 +14,8 @@ import click
 from rich.console import Console
 from rich.table import Table
 
-from octeam.config import data_dir
-from octeam.locking import atomic_write_json, file_lock
+from claws.config import data_dir
+from claws.locking import atomic_write_json, file_lock
 
 
 def _plan_dir(team: str) -> Path:

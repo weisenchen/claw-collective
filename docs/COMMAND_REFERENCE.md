@@ -1,8 +1,8 @@
-# `octeam` Command Reference
+# `claws` Command Reference
 
 ## `init`
 Scaffold a new OpenClaw team workspace.
-- **Usage**: `octeam init [PATH]`
+- **Usage**: `claws init [PATH]`
 - **Options**:
     - `--remote`, `-r`: GitHub remote URL to set as `origin`.
 - **Created Files**: `STATUS.md`, `memory/`, `roadmap/`, `workspace/`, `.gitignore`, etc.
@@ -18,7 +18,7 @@ Manage machine participation in a workspace.
         - `--ip`: Custom IP address (auto-detected).
         - `--workspace`, `-w`: Path to your workspace.
 - **`unregister`**:
-    - **Usage**: `octeam unregister --name <NAME>`
+    - **Usage**: `claws unregister --name <NAME>`
     - Marks a machine as `OFFLINE` in `STATUS.md`.
 
 ---

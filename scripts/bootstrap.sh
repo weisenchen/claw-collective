@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# octeam bootstrapper: automate setup for OpenClaw agents.
+# Claw Collective bootstrapper: automate setup for OpenClaw agents.
 #
 # Usage:
 #   # For the Lead machine (creates workspace):
@@ -15,7 +15,7 @@ ROLE="Worker"
 NAME="$(hostname)"
 WORKSPACE=""
 REMOTE=""
-INSTALL_DIR="$(pwd)/octeam"
+INSTALL_DIR="$(pwd)/claws"
 
 # --- Parse Arguments ---
 while [[ "$#" -gt 0 ]]; do
@@ -29,24 +29,24 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-echo "🦞 octeam | Starting automated setup for agent: $NAME ($ROLE)"
+echo "🦞 claws | Starting automated setup for agent: $NAME ($ROLE)"
 
-# 1. Install/Update octeam dependencies
+# 1. Install/Update Claw Collective dependencies
 if [ ! -f "pyproject.toml" ]; then
-    echo "❌ Error: bootstrap.sh must be run from the octeam project root."
+    echo "❌ Error: bootstrap.sh must be run from the Claw Collective project root."
     exit 1
 fi
 
-echo "📦 Installing octeam..."
+echo "📦 Installing Claw Collective..."
 pip3 install -e . --quiet
 
-# 2. Check for octeam command
-if ! command -v octeam &> /dev/null; then
-    echo "⚠️ Warning: 'octeam' command not found in PATH."
+# 2. Check for claws command
+if ! command -v claws &> /dev/null; then
+    echo "⚠️ Warning: 'claws' command not found in PATH."
     # Try running via python module as fallback
-    COMMAND="python3 -m octeam.cli"
+    COMMAND="python3 -m claws.cli"
 else
-    COMMAND="octeam"
+    COMMAND="claws"
 fi
 
 # 3. Setup Workspace

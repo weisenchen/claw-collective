@@ -1,4 +1,4 @@
-"""octeam register / unregister — machine registration.
+"""Claw Collective register / unregister — machine registration.
 
 Innovation: vendor requires manual file editing. We auto-detect hostname/IP.
 """

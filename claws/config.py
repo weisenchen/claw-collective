@@ -1,6 +1,6 @@
-"""Configuration management for octeam.
+"""Configuration management for Claw Collective.
 
-State lives in ~/.octeam/ (unified).
+State lives in ~/.claws/ (unified).
 """
 
 from __future__ import annotations
@@ -12,8 +12,8 @@ from pathlib import Path
 from pydantic import BaseModel
 
 
-class OcteamConfig(BaseModel):
-    """Global octeam configuration."""
+class ClawsConfig(BaseModel):
+    """Global Claw Collective configuration."""
     data_dir: str = ""
     workspace_dir: str = ""
     sync_remote: str = ""
@@ -24,9 +24,9 @@ class OcteamConfig(BaseModel):
 
 
 def data_dir() -> Path:
-    """Return the octeam data directory (~/.octeam/)."""
-    custom = os.environ.get("OCTEAM_DATA_DIR", "")
-    p = Path(custom) if custom else Path.home() / ".octeam"
+    """Return the Claw Collective data directory (~/.claws/)."""
+    custom = os.environ.get("CLAWS_DATA_DIR", "")
+    p = Path(custom) if custom else Path.home() / ".claws"
     p.mkdir(parents=True, exist_ok=True)
     return p
 
@@ -35,18 +35,18 @@ def config_path() -> Path:
     return data_dir() / "config.json"
 
 
-def load_config() -> OcteamConfig:
+def load_config() -> ClawsConfig:
     """Load config from disk. Returns defaults if missing."""
     p = config_path()
     if not p.exists():
-        return OcteamConfig()
+        return ClawsConfig()
     try:
-        return OcteamConfig.model_validate(json.loads(p.read_text("utf-8")))
+        return ClawsConfig.model_validate(json.loads(p.read_text("utf-8")))
     except Exception:
-        return OcteamConfig()
+        return ClawsConfig()
 
 
-def save_config(cfg: OcteamConfig) -> None:
+def save_config(cfg: ClawsConfig) -> None:
     """Atomically write config."""
     p = config_path()
     p.parent.mkdir(parents=True, exist_ok=True)

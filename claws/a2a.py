@@ -1,4 +1,4 @@
-"""octeam a2a — multi-machine agent-to-agent protocol.
+"""Claw Collective a2a — multi-machine agent-to-agent protocol.
 
 Innovation: pure Python (aiohttp) — no Node dependency, auto-detects peer cards.
 """
@@ -16,7 +16,7 @@ from pathlib import Path
 import click
 from aiohttp import web
 
-from octeam.config import load_config, save_config
+from claws.config import load_config, save_config
 
 
 def _get_ip() -> str:
@@ -47,7 +47,7 @@ async def _handle_card(request: web.Request) -> web.Response:
         "hostname": socket.gethostname(),
         "ip": _get_ip(),
         "port": config.a2a_port,
-        "agent": os.environ.get("OCTEAM_AGENT", "octeam-peer"),
+        "agent": os.environ.get("CLAWS_AGENT", "claws-peer"),
         "protocol": "a2a/0.3.0",
     }
     return web.json_response(card)

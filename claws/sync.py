@@ -1,4 +1,4 @@
-"""octeam sync — git sync with secret scanning.
+"""Claw Collective sync — git sync with secret scanning.
 
 Innovation: inline secret scanning, Golden Loop integration, single module.
 """
@@ -10,7 +10,7 @@ from pathlib import Path
 
 import click
 
-from octeam.secrets import scan_and_report
+from claws.secrets import scan_and_report
 
 
 def _git(args: list[str], cwd: Path, check: bool = False) -> subprocess.CompletedProcess:
@@ -58,14 +58,14 @@ def sync_push(workspace: str, message: str, auto: bool) -> None:
         click.echo("ℹ️  No changes to push")
         return
 
-    msg = message or "octeam sync push"
+    msg = message or "claws sync push"
     _git(["commit", "-m", msg], ws)
 
     # Push
     result = _git(["push"], ws)
     if result.returncode != 0:
         click.echo(f"⚠️  Push failed: {result.stderr.strip()}")
-        click.echo("Try: octeam sync pull first, then push again")
+        click.echo("Try: claws sync pull first, then push again")
         raise SystemExit(1)
 
     click.echo("✅ Pushed successfully")

@@ -1,4 +1,4 @@
-"""octeam inbox — inter-agent messaging.
+"""Claw Collective inbox — inter-agent messaging.
 
 Innovation: simpler API (send/read/broadcast/peek), atomic file ops.
 """
@@ -15,7 +15,7 @@ import click
 from rich.console import Console
 from rich.panel import Panel
 
-from octeam.config import data_dir
+from claws.config import data_dir
 
 
 def _inbox_dir(team: str, agent: str) -> Path:

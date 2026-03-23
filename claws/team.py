@@ -1,4 +1,4 @@
-"""octeam team — team lifecycle management.
+"""Claw Collective team — team lifecycle management.
 """
 
 from __future__ import annotations
@@ -11,8 +11,8 @@ import click
 from rich.console import Console
 from rich.table import Table
 
-from octeam.config import data_dir
-from octeam.locking import atomic_write_json, file_lock, read_json
+from claws.config import data_dir
+from claws.locking import atomic_write_json, file_lock, read_json
 
 
 def _team_dir(team: str) -> Path:
@@ -118,7 +118,7 @@ def team_status(name: str) -> None:
     console.print(f"[bold]Created:[/bold] {cfg.get('created_at', '')}")
 
     # Count tasks
-    from octeam.task import _list_all_tasks
+    from claws.task import _list_all_tasks
     tasks = _list_all_tasks(name)
     console.print(f"[bold]Tasks:[/bold] {len(tasks)}")
 

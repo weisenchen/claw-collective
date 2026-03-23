@@ -7,28 +7,28 @@ from __future__ import annotations
 
 import click
 
-from octeam import __version__
-from octeam.a2a import cmd_a2a
-from octeam.board import cmd_board
-from octeam.config import cmd_config
-from octeam.dashboard import cmd_dashboard
-from octeam.inbox import cmd_inbox
-from octeam.init import cmd_init
-from octeam.lifecycle import cmd_idle, cmd_shutdown
-from octeam.plan import cmd_plan
-from octeam.register import cmd_register, cmd_unregister
-from octeam.spawn import cmd_spawn
-from octeam.sync import cmd_sync
-from octeam.task import cmd_task
-from octeam.team import cmd_team
-from octeam.template import cmd_launch
-from octeam.workspace_mgr import cmd_ws
+from claws import __version__
+from claws.a2a import cmd_a2a
+from claws.board import cmd_board
+from claws.config import cmd_config
+from claws.dashboard import cmd_dashboard
+from claws.inbox import cmd_inbox
+from claws.init import cmd_init
+from claws.lifecycle import cmd_idle, cmd_shutdown
+from claws.plan import cmd_plan
+from claws.register import cmd_register, cmd_unregister
+from claws.spawn import cmd_spawn
+from claws.sync import cmd_sync
+from claws.task import cmd_task
+from claws.team import cmd_team
+from claws.template import cmd_launch
+from claws.workspace_mgr import cmd_ws
 
 
 @click.group()
-@click.version_option(version=__version__, prog_name="octeam")
+@click.version_option(version=__version__, prog_name="claws")
 def cli() -> None:
-    """🦞 octeam — OpenClaw Team CLI
+    """🦞 claws — Claw Collective CLI
 
     Multi-machine agent coordination made simple.
     """

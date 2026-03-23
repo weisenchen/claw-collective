@@ -1,7 +1,7 @@
-"""octeam task — kanban task management with dependency tracking.
+"""Claw Collective task — kanban task management with dependency tracking.
 
 Innovation: simpler commands (task add/done vs task create/update --status),
-unified ~/.octeam/ state.
+unified ~/.claws/ state.
 """
 
 from __future__ import annotations
@@ -17,8 +17,8 @@ from pydantic import BaseModel, Field
 from rich.console import Console
 from rich.table import Table
 
-from octeam.config import data_dir
-from octeam.locking import atomic_write_json, file_lock, read_json
+from claws.config import data_dir
+from claws.locking import atomic_write_json, file_lock, read_json
 
 
 class TaskStatus:

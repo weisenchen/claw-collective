@@ -1,4 +1,4 @@
-"""octeam init — scaffold a new OpenClaw team workspace.
+"""Claw Collective init — scaffold a new OpenClaw team workspace.
 
 Creates the full directory structure, config files, and git repo in one command.
 Innovation: vendor repos require 4 separate installs + manual file creation.
@@ -123,7 +123,7 @@ def cmd_init(path: str, remote: str) -> None:
         subprocess.run(["git", "init"], cwd=root, capture_output=True)
         subprocess.run(["git", "add", "."], cwd=root, capture_output=True)
         subprocess.run(
-            ["git", "commit", "-m", "octeam init: scaffold workspace"],
+            ["git", "commit", "-m", "claws init: scaffold workspace"],
             cwd=root, capture_output=True,
         )
         click.echo("🔧 Initialized git repository")

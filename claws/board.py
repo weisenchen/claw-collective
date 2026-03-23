@@ -1,4 +1,4 @@
-"""octeam board — terminal kanban dashboard.
+"""Claw Collective board — terminal kanban dashboard.
 
 Innovation: Rich-based terminal kanban instead of requiring a web browser.
 """
@@ -14,7 +14,7 @@ from rich.live import Live
 from rich.panel import Panel
 from rich.table import Table
 
-from octeam.task import TaskStatus, _list_all_tasks
+from claws.task import TaskStatus, _list_all_tasks
 
 
 def _build_kanban(team: str) -> Columns:

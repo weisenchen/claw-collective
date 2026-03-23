@@ -1,4 +1,4 @@
-"""octeam template — TOML-based team templates.
+"""Claw Collective template — TOML-based team templates.
 
 Innovation: flat, readable TOML format for defining team structure.
 """
@@ -40,11 +40,11 @@ def cmd_launch(template: str, team: str | None) -> None:
     click.echo(f"🚀 Launching team '{team_name}' from template...")
 
     # Create team
-    from octeam.team import team_create
+    from claws.team import team_create
     team_create.callback(team_name, data.get("team", {}).get("description", ""), data.get("team", {}).get("leader", ""))
 
     # Spawn agents
-    from octeam.spawn import cmd_spawn
+    from claws.spawn import cmd_spawn
     agents = data.get("agents", [])
     for agent in agents:
         agent_name = agent.get("name")

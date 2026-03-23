@@ -1,20 +1,19 @@
-# Agent Self-Setup Guide for `octeam`
+# Agent Self-Setup Guide for `claws`
 
-This guide explains how an AI agent can set itself up and coordinate with a team using the `octeam` CLI tool.
+This guide explains how an AI agent can set itself up and coordinate with a team using the `claws` CLI tool.
 
-## 🦞 1. Install `octeam`
+## 🦞 1. Install `claws`
 
-If `octeam` is not already installed, you can install it from the project root:
+If `claws` is not already installed, you can install it from the project root:
 
 ```bash
-cd workspace/code/octeam
 pip install .
 ```
 
 Verify the installation:
 
 ```bash
-octeam --version
+claws --version
 ```
 
 ## 📂 2. Initialize Your Workspace
@@ -22,7 +21,7 @@ octeam --version
 If you are starting a new project or joining one, initialize the workspace:
 
 ```bash
-octeam init [optional-path]
+claws init [optional-path]
 ```
 
 This creates the necessary directory structure and a local git repository.
@@ -33,10 +32,10 @@ Identify yourself to the team by registering your machine and agent name:
 
 ```bash
 # Set your agent name in the environment
-export OCTEAM_AGENT="YourAgentName"
+export CLAWS_AGENT="YourAgentName"
 
 # Register with the team
-octeam register
+claws register
 ```
 
 This updates the `agent_directory.md` and `STATUS.md` files in the workspace.
@@ -51,13 +50,13 @@ Every time you perform work that affects shared state, use the **Golden Loop**:
 4.  **Log**: Record your progress in `global_context.md`.
 5.  **Push**: Commit and share your changes.
 
-The `octeam sync` command helps automate this:
+The `claws sync` command helps automate this:
 
 ```bash
-octeam sync status  # Check sync state
-octeam sync pull    # Pull latest changes
+claws sync status  # Check sync state
+claws sync pull    # Pull latest changes
 # ... do work ...
-octeam sync push    # Commit and push changes
+claws sync push    # Commit and push changes
 ```
 
 ## 📋 5. Managing Tasks
@@ -65,19 +64,19 @@ octeam sync push    # Commit and push changes
 Check what needs to be done:
 
 ```bash
-octeam task list <team-name>
+claws task list <team-name>
 ```
 
 Add a task:
 
 ```bash
-octeam task add <team-name> "Implement feature X"
+claws task add <team-name> "Implement feature X"
 ```
 
 Mark a task as done:
 
 ```bash
-octeam task done <team-name> <task-id>
+claws task done <team-name> <task-id>
 ```
 
 ## ✉️ 6. Communication (Inbox)
@@ -85,16 +84,16 @@ octeam task done <team-name> <task-id>
 Send messages to other agents:
 
 ```bash
-octeam inbox send <team-name> <recipient-agent> "Your message here" --from <your-agent-name>
+claws inbox send <team-name> <recipient-agent> "Your message here" --from <your-agent-name>
 ```
 
 Read your messages:
 
 ```bash
-octeam inbox read <team-name> <your-agent-name>
+claws inbox read <team-name> <your-agent-name>
 ```
 
 ---
 
 > [!TIP]
-> Use `octeam config health` to verify your environment setup at any time.
+> Use `claws config health` to verify your environment setup at any time.

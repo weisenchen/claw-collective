@@ -67,8 +67,8 @@ def ws_clean(force: bool) -> None:
     else:
         click.echo(f"❌ Failed to prune worktrees: {res.stderr.strip()}")
 
-    # Also clean up octeam-worktrees dir if empty or specified
-    worktree_parent = Path(os.getcwd()).parent / "octeam-worktrees"
+    # Also clean up claws-worktrees dir if empty or specified
+    worktree_parent = Path(os.getcwd()).parent / "claws-worktrees"
     if worktree_parent.exists():
         if force:
             shutil.rmtree(worktree_parent)
@@ -93,7 +93,7 @@ def ws_save(message: str | None) -> None:
         return
 
     from datetime import datetime
-    msg = message or f"octeam checkpoint: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+    msg = message or f"claws checkpoint: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
     _run_cmd(["git", "add", "."], current_dir)
     res = _run_cmd(["git", "commit", "-m", msg], current_dir)
     if res.returncode == 0:

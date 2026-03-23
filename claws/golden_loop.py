@@ -1,6 +1,6 @@
 """Golden Loop — the core sync workflow for every shared-state operation.
 
-Innovation over vendor: ClawTeam requires manual pull/push. octeam makes this
+Innovation over vendor: ClawTeam requires manual pull/push. Claw Collective makes this
 automatic via a context manager that wraps every command touching shared state.
 
 The loop: PULL → LOCK → WORK → LOG → PUSH
