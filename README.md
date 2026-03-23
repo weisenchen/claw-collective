@@ -1,5 +1,3 @@
-![Claw Collective Banner](docs/banner.png)
-
 # 🦞 Claw Collective: Seamless Agent Coordination
 
 ### "The definitive solution for scaling OpenClaw teams without the complexity."
@@ -31,6 +29,8 @@ Most OpenClaw users struggle with scattered state, manual sync scripts, and brok
 
 ### 1. Installation
 ```bash
+git clone https://github.com/weisenchen/claw-collective.git
+cd claw-collective
 pip install .
 ```
 
@@ -47,11 +47,21 @@ claws register
 ```
 
 ### 4. Deploy via Telegram
+Command your collective from any device using natural language.
+
+**Example Instruction:**
+> "Create a new research team for the AI Ethics project. Spawn a Lead Agent and three Security Reviewers."
+
+**Auto-Execution:**
+The `claws` bridge automatically parses this and executes:
 ```bash
-# Agents monitor Telegram channels for instructions
-# Example: "Create a new research team for the AI Ethics project"
-# claws automatically parses and spawns the required agents.
+claws init ./ai-ethics
+claws team create ethics-team --leader "LeadAgent"
+claws spawn --team ethics-team --name "LeadAgent" --task "Initial architecture"
+# ... spawning SecurityReviewers ...
 ```
+
+*See also: [**Telegram Orchestration scenarios**](docs/TELEGRAM_ORCHESTRATION.md)*
 
 ---
 
