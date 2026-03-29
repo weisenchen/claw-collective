@@ -13,8 +13,7 @@ import click
 
 
 GITIGNORE_CONTENT = """\
-# OpenClaw System Files
-.openclaw/
+# OpenClaw System Files (Core state is synced, only local/cache is ignored)
 *.log
 *.db
 sessions/

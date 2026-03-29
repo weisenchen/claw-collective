@@ -31,6 +31,11 @@ Most OpenClaw users struggle with scattered state, manual sync scripts, and brok
 ```bash
 git clone https://github.com/weisenchen/claw-collective.git
 cd claw-collective
+
+# (Optional but Recommended) Create a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
 pip install .
 ```
 
@@ -67,10 +72,10 @@ claws spawn --team ethics-team --name "LeadAgent" --task "Initial architecture"
 
 ## 📖 The library of Success
 
-*   🤖 [**Agent Self-Setup**](docs/AGENT_SELF_SETUP.md): Empower your agents to join the team autonomously.
-*   🔄 [**Workflow Examples**](docs/WORKFLOW_EXAMPLES.md): Master complex coordination patterns.
-*   🗺️ [**Getting Started**](docs/GETTING_STARTED.md): The executive roadmap for new installations.
-*   📜 [**Command Reference**](docs/COMMAND_REFERENCE.md): The full power of `claws` at your fingertips.
+*   🤖 [**Scenario 1: Telegram Setup**](docs/TELEGRAM_SETUP.md): Command your team via natural language.
+*   🖥️ [**Scenario 2: TUI Setup**](docs/TUI_SETUP.md): Real-time coordination via live terminal boards.
+*   🦞 [**Scenario 3: Human Setup**](docs/HUMAN_SETUP.md): Manual setup guide for team leads and developers.
+*   📜 [**Command Reference**](docs/COMMAND_REFERENCE.md): Full CLI syntax for AI agents and humans.
 
 ---
 

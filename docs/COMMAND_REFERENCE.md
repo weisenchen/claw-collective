@@ -1,76 +1,89 @@
-# `claws` Command Reference
+# 📜 `claws` Command Reference (Agent Edition)
 
-## `init`
+This document provides the full syntax and description for every `claws` command. AI Agents should use this to explore and execute team coordination tasks.
+
+---
+
+## 🛠️ Workspace & Setup
+
+### `claws init`
 Scaffold a new OpenClaw team workspace.
-- **Usage**: `claws init [PATH]`
-- **Options**:
-    - `--remote`, `-r`: GitHub remote URL to set as `origin`.
-    - `--github`, `-g`: Create a **private** GitHub repository automatically (requires `gh` CLI).
-    - `--repo-name`, `-n`: Custom name for the GitHub repository (defaults to folder name).
-- **Created Files**: `STATUS.md`, `memory/`, `roadmap/`, `workspace/`, `.gitignore`, etc.
+- **Usage**: `claws init [PATH] [OPTIONS]`
+- **Example**: `claws init ./my-collective --github`
+
+### `claws register`
+Identify this machine and agent to the team.
+- **Usage**: `claws register [OPTIONS]`
+- **Example**: `claws register --role Worker --name Researcher-01`
 
 ---
 
-## `register` / `unregister`
-Manage machine participation in a workspace.
-- **`register`**:
-    - **Options**:
-        - `--name`, `-n`: Custom machine name (defaults to hostname).
-        - `--role`, `-r`: `Leader`, `Worker`, `Tester`, `Researcher`.
-        - `--ip`: Custom IP address (auto-detected).
-        - `--workspace`, `-w`: Path to your workspace.
-- **`unregister`**:
-    - **Usage**: `claws unregister --name <NAME>`
-    - Marks a machine as `OFFLINE` in `STATUS.md`.
+## 👥 Team & Tasks (Kanban)
+
+### `claws team`
+Manage team lifecycle.
+- **Commands**:
+  - `create <NAME>`: Create a new team.
+    - **Example**: `claws team create dev-sprint --leader LeadAgent --description "Sprint 1"`
+  - `list`: List all teams.
+  - `status <NAME>`: Show team members.
+
+### `claws task`
+Kanban-style task management.
+- **Commands**:
+  - `add <TEAM> <SUBJECT>`: Add a new task.
+    - **Example**: `claws task add dev-sprint "Fix login bug" --owner LeadAgent`
+  - `start <TEAM> <ID>`: Move to **In Progress**.
+  - `done <TEAM> <ID>`: Move to **Completed**.
+  - `list <TEAM>`: Show all tasks.
+
+### `claws board`
+Visual team dashboard.
+- **Commands**:
+  - `show <TEAM>`: Static terminal board.
+  - `live <TEAM>`: Interactive TUI board.
+    - **Example**: `claws board live dev-sprint`
 
 ---
 
-## `sync`
-Git-based synchronization with safety checks.
-- **`sync push`**:
-    - Scans for secrets via `secrets.py`.
-    - commits all changes.
-    - pushes to remote.
-    - **Options**: `--message`, `-m`, `--auto` (no prompts).
-- **`sync pull`**:
-    - Fetches from remote and rebases.
-    - **Options**: `--dry-run` to preview changes.
-- **`sync status`**: Shows local changes and whether you are ahead/behind the remote.
+## 🔄 Synchronization (The Golden Loop)
+
+### `claws sync`
+Git-based state synchronization.
+- **Commands**:
+  - `pull`: Pull latest team state.
+  - `push`: Push changes to remote.
+    - **Example**: `claws sync push -m "Updated roadmap for Sprint 1"`
+  - `status`: Show sync state.
 
 ---
 
-## `team`
-Manage team lifecycles.
-- **`team create <NAME>`**:
-    - **Options**: `--description`, `-d`, `--leader`, `-l`.
-- **`team list`**: Shows all teams in a Rich table.
-- **`team status <NAME>`**: Shows details for a specific team.
-- **`team cleanup <NAME>`**: Deletes a team and all its data.
+## ✉️ Communication
+
+### `claws inbox`
+Inter-agent messaging.
+- **Commands**:
+  - `send <TEAM> <TO> <MSG>`: Send a message.
+    - **Example**: `claws inbox send dev-sprint Researcher-01 "Check the log files" --from LeadAgent`
+  - `read <TEAM> <AGENT>`: Consume messages.
+  - `peek <TEAM> <AGENT>`: Preview messages.
+  - `broadcast <TEAM> <MSG>`: Message everyone.
+
+### `claws a2a`
+Real-time peer-to-peer protocol.
+- **Commands**:
+  - `serve`: Start listener (default port 18800).
+  - `send <IP> <MSG>`: Direct alert.
+    - **Example**: `claws a2a send 192.168.1.10 "Urgent: Process hung"`
+  - `card`: Show IP/connection details.
 
 ---
 
-## `task`
-Kanban-style task management with dependency tracking.
-- **`task add <TEAM> <SUBJECT>`**:
-    - **Options**: `--owner`, `-o`, `--blocked-by`, `-b` (comma-separated IDs).
-- **`task start <TEAM> <TASK_ID>`**: Moves task to `in_progress`.
-- **`task done <TEAM> <TASK_ID>`**: Marks task `completed` and **auto-unblocks** dependents.
-- **`task list <TEAM>`**: Filterable list of tasks in a table.
+## ⚙️ Configuration
 
----
-
-## `inbox`
-Inter-agent asynchronous messaging.
-- **`inbox send <TEAM> <TO> <MESSAGE> --from <NAME>`**: Send a point-to-point message.
-- **`inbox broadcast <TEAM> <MESSAGE> --from <NAME>`**: Message everyone except the sender.
-- **`inbox read <TEAM> <AGENT>`**: Consume and display messages.
-- **`inbox peek <TEAM> <AGENT>`**: View messages without removing them from the queue.
-
----
-
-## `board`
-Terminal-based Kanban dashboards.
-- **`board show <TEAM>`**: Static view of the Kanban board with 4 columns: Pending, In Progress, Blocked, Completed.
-- **`board live <TEAM>`**:
-    - Auto-refreshing dashboard.
-    - **Options**: `--interval`, `-i` (default: 3s).
+### `claws config`
+System settings and health.
+- **Commands**:
+  - `show`: Display current JSON configuration.
+  - `set <KEY> <VALUE>`: Update a setting (e.g., `a2a_port`).
+  - `health`: Check directory status and dependencies (Git, Tmux).

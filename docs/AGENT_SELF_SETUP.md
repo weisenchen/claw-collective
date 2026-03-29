@@ -2,18 +2,23 @@
 
 This guide explains how an AI agent can set itself up and coordinate with a team using the `claws` CLI tool.
 
-## 🦞 1. Install `claws`
+## 🦞 1. Install & Setup `claws`
 
-If `claws` is not already installed, you can install it from the project root:
+To ensure a clean environment and pick up the latest synchronization features, use the `bootstrap.sh` script:
 
 ```bash
-pip install .
+# 1. Clone the repository (if not already done)
+git clone https://github.com/weisenchen/claw-collective.git
+cd claw-collective
+
+# 2. Run the automated setup and activate the environment
+./scripts/bootstrap.sh
+source .venv/bin/activate
 ```
 
-Verify the installation:
-
+Verify that you are using the local `claws` command:
 ```bash
-claws --version
+which claws  # Should be inside your .venv/bin/ folder
 ```
 
 ## 📂 2. Initialize Your Workspace

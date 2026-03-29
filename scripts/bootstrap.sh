@@ -38,7 +38,22 @@ if [ ! -f "pyproject.toml" ]; then
 fi
 
 echo "📦 Installing Claw Collective..."
-pip3 install -e . --quiet
+
+# --- PEP 668 / Modern Python Compliance ---
+# If we are not in a virtual environment, create one.
+if [[ -z "$VIRTUAL_ENV" ]]; then
+    if [ ! -d ".venv" ]; then
+        echo "🌐 Creating virtual environment (.venv)..."
+        python3 -m venv .venv
+    fi
+    echo "⚡ Activating virtual environment..."
+    # shellcheck source=/dev/null
+    source .venv/bin/activate
+fi
+
+# Ensure pip is up to date and install in the current environment
+pip install --upgrade pip --quiet
+pip install -e . --quiet
 
 # 2. Check for claws command
 if ! command -v claws &> /dev/null; then
@@ -49,7 +64,13 @@ else
     COMMAND="claws"
 fi
 
-# 3. Setup Workspace
+# 3. Setup Workspace (Skip if no remote or workspace provided)
+if [ -z "$REMOTE" ] && [ -z "$WORKSPACE" ]; then
+    echo "ℹ️  No --workspace or --remote provided. Skipping workspace setup."
+    echo "💡 To initialize or join a team, use --role, --workspace, and --remote."
+    exit 0
+fi
+
 if [ "$ROLE" == "Leader" ]; then
     if [ -z "$WORKSPACE" ]; then
         echo "❌ Error: --workspace is required for Leader role."

@@ -24,9 +24,31 @@ class ClawsConfig(BaseModel):
 
 
 def data_dir() -> Path:
-    """Return the Claw Collective data directory (~/.claws/)."""
+    """Return the Claw Collective data directory.
+    
+    Order of preference:
+    1. CLAWS_DATA_DIR env var
+    2. .openclaw/ directory in current or parent hierarchy
+    3. ~/.claws/ (fallback)
+    """
     custom = os.environ.get("CLAWS_DATA_DIR", "")
-    p = Path(custom) if custom else Path.home() / ".claws"
+    if custom:
+        p = Path(custom)
+    else:
+        # Search for .openclaw/ up the directory tree
+        found_dir = None
+        current = Path.cwd().resolve()
+        for _ in range(10): # Max depth 10
+            target = current / ".openclaw"
+            if target.is_dir():
+                found_dir = target
+                break
+            if current.parent == current:
+                break
+            current = current.parent
+        
+        p = found_dir if found_dir else Path.home() / ".claws"
+    
     p.mkdir(parents=True, exist_ok=True)
     return p
 
