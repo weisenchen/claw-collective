@@ -98,7 +98,9 @@ FILES = {
 @click.command("init")
 @click.argument("path", default=".", type=click.Path())
 @click.option("--remote", "-r", default="", help="GitHub remote URL to set as origin")
-def cmd_init(path: str, remote: str) -> None:
+@click.option("--github", "-g", is_flag=True, help="Create a private GitHub repository")
+@click.option("--repo-name", "-n", help="Name for the GitHub repository (defaults to folder name)")
+def cmd_init(path: str, remote: str, github: bool, repo_name: str | None) -> None:
     """Scaffold a new OpenClaw team workspace."""
     root = Path(path).resolve()
     root.mkdir(parents=True, exist_ok=True)
@@ -135,5 +137,29 @@ def cmd_init(path: str, remote: str) -> None:
             cwd=root, capture_output=True,
         )
         click.echo(f"🔗 Set remote: {remote}")
+
+    # GitHub Creation (Private Repo)
+    if github:
+        name = repo_name or root.name
+        click.echo(f"🚀 Creating private GitHub repository '{name}'...")
+        
+        # Check if gh is installed and authenticated
+        try:
+            res = subprocess.run(["gh", "auth", "status"], capture_output=True, text=True)
+            if res.returncode != 0:
+                click.echo("❌ GitHub CLI (gh) not authenticated. Please run 'gh auth login'.")
+            else:
+                # Create the repo
+                create_res = subprocess.run(
+                    ["gh", "repo", "create", name, "--private", "--source=.", "--push", "--remote=origin"],
+                    cwd=root, capture_output=True, text=True
+                )
+                
+                if create_res.returncode == 0:
+                    click.echo(f"✅ Successfully created and pushed to GitHub: {name}")
+                else:
+                    click.echo(f"❌ Failed to create GitHub repository: {create_res.stderr.strip()}")
+        except FileNotFoundError:
+            click.echo("❌ GitHub CLI (gh) not found. Please install it from https://cli.github.com/.")
 
     click.echo("✅ Workspace ready!")

@@ -5,6 +5,8 @@ Scaffold a new OpenClaw team workspace.
 - **Usage**: `claws init [PATH]`
 - **Options**:
     - `--remote`, `-r`: GitHub remote URL to set as `origin`.
+    - `--github`, `-g`: Create a **private** GitHub repository automatically (requires `gh` CLI).
+    - `--repo-name`, `-n`: Custom name for the GitHub repository (defaults to folder name).
 - **Created Files**: `STATUS.md`, `memory/`, `roadmap/`, `workspace/`, `.gitignore`, etc.
 
 ---

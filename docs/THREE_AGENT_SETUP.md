@@ -16,7 +16,8 @@ On **Machine A** (The Team Lead):
 
 1.  **Create the Workspace**:
     ```bash
-    claws init project-alpha --remote git@github.com:your-org/project-alpha.git
+    # This will create a private GitHub repository and set it as origin
+    claws init project-alpha --github
     cd project-alpha
     ```
 
